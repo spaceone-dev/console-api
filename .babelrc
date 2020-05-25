@@ -1,0 +1,29 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "10"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import",
+    ["dynamic-import-node", { "noInterop": true }],
+    [
+      "module-resolver",
+      {
+        "root": ["./src/"],
+        "alias": {
+          "@": "./src/",
+          "@controllers": "./src/controllers",
+          "@lib": "./src/lib",
+          "@test": "./test",
+          "@config": "./config"
+        }
+      }
+    ]
+  ]
+}
