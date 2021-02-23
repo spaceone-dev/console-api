@@ -20,6 +20,7 @@ const getProjectGroups = async (client, params) => {
     let {results} = await client.ProjectGroup.list(reqParams);
 
     reqParams.query.filter = [];
+    reqParams.query.count_only = true;
 
     // eslint-disable-next-line no-undef
     const items = await Promise.all(results.map((itemInfo) => {
