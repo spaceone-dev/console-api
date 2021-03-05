@@ -3,11 +3,25 @@ import _ from 'lodash';
 import logger from '@lib/logger';
 
 const getPermissionMap = async (client, params) => {
+    const reqParams = {
+        author_within: true,
+        query: {
+            only: ['project_group_id']
+        }
+    };
+
+    if (params.item_type === 'ROOT') {
+        reqParams.query.filter = [{
+            k: 'parent_project_group',
+            v: null,
+            o: 'eq'
+        }];
+    } else {
+        reqParams.parent_project_group_id = params.item_id;
+    }
+
     const res = {};
-    const {results: childrenWithPermission} = await client.ProjectGroup.list({
-        ...params,
-        author_within: true
-    });
+    const {results: childrenWithPermission} = await client.ProjectGroup.list({ reqParams });
     childrenWithPermission.forEach(d => {
         res[d.project_group_id] = true;
     });
@@ -54,7 +68,7 @@ const getProjectGroups = async (client, params) => {
 
     let hasPermissionMap = {};
     if (params.include_permission) {
-        hasPermissionMap = await getPermissionMap(client, reqParams);
+        hasPermissionMap = await getPermissionMap(client, params);
     }
 
     let hasChildMap = {};
