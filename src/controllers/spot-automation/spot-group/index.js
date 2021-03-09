@@ -1,5 +1,6 @@
 import grpcClient from '@lib/grpc-client';
 import { SUPPORTED_RESOURCE_TYPES } from './config';
+import {getCloudService} from '@/controllers/inventory/cloud-service';
 
 
 const createSpotGroup = async (params) => {
@@ -55,6 +56,25 @@ const getSupportedResourceTypes = () => {
     return SUPPORTED_RESOURCE_TYPES;
 };
 
+const getCloudServiceInfoByResourceId = async (resourceId) => {
+    const response = await getCloudService({
+        cloud_service_id: resourceId
+    });
+    const regionCode = response.region_code;
+    const desiredCapacity = response.data.desired_capacity;
+    const result = { region_code: regionCode, desired_capacity: desiredCapacity };
+    return result;
+};
+
+const getCloudServiceInfo = async (params) => {
+    const cloudServiceInfoList =[];
+    for (const id of params.resource_ids) {
+        const res = await getCloudServiceInfoByResourceId(id);
+        cloudServiceInfoList.push(res);
+    }
+    return cloudServiceInfoList;
+};
+
 
 export {
     createSpotGroup,
@@ -64,5 +84,7 @@ export {
     listSpotGroups,
     interruptSpotGroups,
     statSpotGroups,
-    getSupportedResourceTypes
+    getSupportedResourceTypes,
+    getCloudServiceInfoByResourceId,
+    getCloudServiceInfo
 };
