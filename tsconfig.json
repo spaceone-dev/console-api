@@ -16,15 +16,15 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": ["node"],
-        "paths": {
-          "@/*": ["src/*"],
-          "@controllers": ["src/controllers"],
-          "@factories": ["src/factories"],
-          "@lib": ["src/lib"],
-          "@test": ["test"],
-          "@config": ["config"]
-        },
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    "paths": {
+      "@/*": ["src/*"],
+      "@controllers": ["src/controllers/*"],
+      "@factories": ["src/factories/*"],
+      "@lib": ["src/lib/*"],
+      "@test": ["test/*"],
+      "@config": ["config/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
   },
   "include": ["src/**/*.js","src/**/*.ts", "test/**/*.ts"],
   "exclude": ["node_modules", "./node_modules/**", "./dist/**"]
