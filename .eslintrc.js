@@ -2,18 +2,24 @@ module.exports = {
     root: true,
     extends: [
         'eslint:recommended',
+        'plugin:@typescript-eslint/eslint-recommended'
     ],
+    parser: "@typescript-eslint/parser",
     parserOptions: {
-        parser: 'babel-eslint',
-        ecmaVersion: 2018,
-        sourceType: 'module'
+        project: 'tsconfig.json',
+        sourceType: "module",
+        ecmaVersion: 2018
     },
     plugins: [
+        '@typescript-eslint',
+        'eslint-plugin-node',
         'html',
         'standard',
     ],
     env: {
         browser: true,
+        es6: true,
+        node: true
     },
     globals: {
     },
@@ -24,7 +30,7 @@ module.exports = {
             "ignoreComments": true,
             "ArrayExpression": 1
         }],
-        'quotes': ['off', 'single'],
+        'quotes': ['error', 'single'],
         'comma-dangle': ['error', {
             'arrays': 'never',
             'objects': 'never',
@@ -37,21 +43,34 @@ module.exports = {
             "error",
             "unix"
         ],
-        "quotes": [
-            "error",
-            "single"
-        ],
+        "max-len": ["error", { code: 200 }],
         'no-empty': 'error',
         'no-duplicate-imports': 'error',
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         "semi": ["error", "always"],
-        'vue/max-attributes-per-line': ['off', {
-            'singleline': 1,
-            'multiline': {
-                'max': 1,
-                'allowFirstLine': false
+        // typescript rules
+        "@typescript-eslint/explicit-member-accessibility": [
+            "error",
+            {
+                accessibility: "no-public",
+                overrides: {
+                    accessors: "no-public",
+                    methods: "no-public",
+                    properties: "no-public",
+                    parameterProperties: "explicit"
+                }
             }
-        }],
+        ],
+        "@typescript-eslint/no-object-literal-type-assertion": ["off"],
+        "@typescript-eslint/no-parameter-properties": [
+            "error",
+            { allows: ["protected", "public"] }
+        ],
+        "@typescript-eslint/camelcase": ["off"], // use eslint camelcase rule
+        "@typescript-eslint/no-empty-function": ["off"], // use eslint no-empty-function rule
+        "@typescript-eslint/no-use-before-define": ["off"], // use eslint no-use-before-define rule
+        "@typescript-eslint/ban-ts-ignore": ["off"],
+        "@typescript-eslint/explicit-function-return-type": ["off"]
     }
 }
