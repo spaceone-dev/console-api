@@ -1,7 +1,7 @@
 {
   "name": "spaceone-console-api",
   "version": "0.0.1",
-  "description": "SpaceOne Console API server",
+  "description": "SpaceOne Console API",
   "scripts": {
     "start": "dist/bin/www",
     "dev": "babel-node src/bin/www",
