@@ -4,6 +4,7 @@ import logRouter from './log';
 import metricRouter from './metric';
 import escalationPolicy from './escalation-policy';
 import projectAlertConfig from './project-alert-config';
+import alertRouter from './alert';
 
 const router = express.Router();
 
@@ -12,4 +13,5 @@ router.use('/log', logRouter);
 router.use('/metric', metricRouter);
 router.use('/escalation-policy', escalationPolicy);
 router.use('/project-alert-config', projectAlertConfig);
+router.use('/alert', alertRouter);
 export default router;
