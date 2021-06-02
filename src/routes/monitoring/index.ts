@@ -6,6 +6,7 @@ import escalationPolicy from './escalation-policy';
 import projectAlertConfig from './project-alert-config';
 import alertRouter from './alert';
 import noteRouter from './note';
+import maintenanceWindowRouter from './maintenance-window';
 
 const router = express.Router();
 
@@ -16,4 +17,5 @@ router.use('/escalation-policy', escalationPolicy);
 router.use('/project-alert-config', projectAlertConfig);
 router.use('/alert', alertRouter);
 router.use('/note', noteRouter);
+router.use('/maintenance-window', maintenanceWindowRouter);
 export default router;
